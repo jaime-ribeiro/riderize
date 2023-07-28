@@ -22,7 +22,7 @@ services:
       - postgres
     environment:
       #Sem o DATABASE_URL não conseguia encontrar o banco de dados, e não pode ser @localhost
-      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/mydb
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/riderize
       PORT: 3000
     ports:
       - "3000:3000"
