@@ -1,21 +1,13 @@
 import { Arg, Field, InputType, Mutation, Query, Resolver } from "type-graphql";
-import { Ride } from "./Ride";
-
-@InputType()
-class RideInput {
-  @Field()
-  description: String;
-  @Field()
-  title: String;
-  @Field()
-  category: String;
-}
+import { Ride } from "./RideType";
+import { RideInput } from "./RideInput";
+import { PrismaClient } from "@prisma/client";
 
 @Resolver()
 class RideResolver {
   @Mutation(() => Ride)
   async addRide(@Arg("rideInput") rideInput: RideInput) {
-    const ride = await RideSchema.create(rideInput);
+    const ride = await 
     return ride;
   }
   @Query(() => [Ride])
