@@ -1,14 +1,7 @@
 import { Field, InputType, Int } from "type-graphql";
-import { Ride } from "./RideType";
 
 @InputType()
 export class RideCreateInput {
-  /*   @Field()
-  id: number;
-  @Field()
-  createdAt: Date;
-  @Field()
-  updatedAt: Date; */
   @Field()
   name: string;
   @Field()

@@ -46,7 +46,7 @@ model UserRide {
   ride_id           Int
   user_id           Int
   created_by        Int
-  subscription_date DateTime
+  subscription_date DateTime @default(now())
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
   User              User     @relation(fields: [ride_id], references: [id])
