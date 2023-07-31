@@ -15,31 +15,42 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
+  id        Int        @id @default(autoincrement())
+  email     String     @unique
   name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  rides     UserRide[]
+
+  @@map("users")
 }
 
 model Ride {
-  id                      Int      @id @default(autoincrement())
+  id                      Int        @id @default(autoincrement())
   name                    String
   start_date              DateTime
   start_date_registration DateTime
   end_date_registration   DateTime
-  additional_information  String?  @db.Text
+  additional_information  String?    @db.Text
   start_place             String
   participants_limit      Int
-  createdAt               DateTime @default(now())
-  updatedAt               DateTime @updatedAt
+  createdAt               DateTime   @default(now())
+  updatedAt               DateTime   @updatedAt
+  users                   UserRide[]
+
+  @@map("rides")
 }
 
-model RideUser {
+model UserRide {
   id                Int      @id @default(autoincrement())
   ride_id           Int
   user_id           Int
+  created_by        Int
   subscription_date DateTime
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
+  User              User     @relation(fields: [ride_id], references: [id])
+  Ride              Ride     @relation(fields: [user_id], references: [id])
+
+  @@map("users_rides")
 }
