@@ -5,15 +5,41 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator typegraphql {
+  provider = "typegraphql-prisma"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id Int @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 
-  email String @unique
+model Ride {
+  id                      Int      @id @default(autoincrement())
+  name                    String
+  start_date              DateTime
+  start_date_registration DateTime
+  end_date_registration   DateTime
+  additional_information  String?  @db.Text
+  start_place             String
+  participants_limit      Int
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+}
 
-  name String?
+model RideUser {
+  id                Int      @id @default(autoincrement())
+  ride_id           Int
+  user_id           Int
+  subscription_date DateTime
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
