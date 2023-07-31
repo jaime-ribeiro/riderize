@@ -1,24 +1,25 @@
-import { Field, ObjectType } from "type-graphql";
+import "reflect-metadata";
+import { Field, ID, Int, ObjectType } from "type-graphql";
 @ObjectType()
 export class Ride {
-  @Field()
+  @Field((type) => ID)
   id: number;
+  @Field((type) => Date)
+  createdAt: Date;
+  @Field((type) => Date)
+  updatedAt: Date;
   @Field()
-  name: String;
+  name: string;
   @Field()
-  start_date: String;
+  start_date: Date;
   @Field()
   start_date_registration: Date;
   @Field()
   end_date_registration: Date;
+  @Field((type) => String, { nullable: true })
+  additional_information: string | null;
   @Field()
-  additional_information: String;
-  @Field()
-  start_place: String;
-  @Field()
-  participants_limit: Number;
-  @Field()
-  createdAt: Date;
-  @Field()
-  updatedAt: Date;
+  start_place: string;
+  @Field((type) => Int)
+  participants_limit: number;
 }

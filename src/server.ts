@@ -1,27 +1,27 @@
 import "reflect-metadata";
-import { ApolloServer } from "apollo-server";
+
+import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import { buildSchema } from "type-graphql";
+import * as tq from "type-graphql";
 import { Context, context } from "./context";
 import { RideResolver } from "./ride/RideResolver";
-import { resolvers } from "@generated/type-graphql";
-const PORT = process.env.PORT || 4000;
+import path from "path";
 
-async function bootstrap() {
-  // ... Building schema here
-  const schema = await buildSchema({
+const app = async () => {
+  const schema = await tq.buildSchema({
     resolvers: [RideResolver],
-    validate: false,
+    validate: { forbidUnknownValues: false },
+    emitSchemaFile: path.resolve(__dirname, "schema.gql"),
   });
 
-  // Create the GraphQL server
-  const server = new ApolloServer({
-    schema,
+  const server = new ApolloServer<Context>({ schema });
+
+  const { url } = await startStandaloneServer(server, {
+    context: async () => context,
   });
 
-  // Start the server
-  const { url } = await server.listen(PORT);
-  console.log(`Server is running, GraphQL Playground available at ${url}`);
-}
+  console.log(`
+🚀 Server ready at: ${url}`);
+};
 
-bootstrap();
+app();

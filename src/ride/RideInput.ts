@@ -1,26 +1,26 @@
-import { Field, InputType } from "type-graphql";
+import { Field, InputType, Int } from "type-graphql";
 import { Ride } from "./RideType";
 
 @InputType()
-export class RideInput implements Partial<Ride> {
-  @Field()
+export class RideCreateInput {
+  /*   @Field()
   id: number;
   @Field()
-  name: String;
+  createdAt: Date;
   @Field()
-  start_date: String;
+  updatedAt: Date; */
+  @Field()
+  name: string;
+  @Field()
+  start_date: Date;
   @Field()
   start_date_registration: Date;
   @Field()
   end_date_registration: Date;
+  @Field((type) => String, { nullable: true })
+  additional_information: string | null;
   @Field()
-  additional_information: String;
-  @Field()
-  start_place: String;
-  @Field()
-  participants_limit: Number;
-  @Field()
-  createdAt: Date;
-  @Field()
-  updatedAt: Date;
+  start_place: string;
+  @Field((type) => Int)
+  participants_limit: number;
 }
