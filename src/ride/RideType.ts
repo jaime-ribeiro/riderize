@@ -1,6 +1,6 @@
 import { Field, ObjectType } from "type-graphql";
 @ObjectType()
-class Ride {
+export class Ride {
   @Field()
   id: number;
   @Field()
@@ -22,4 +22,3 @@ class Ride {
   @Field()
   updatedAt: Date;
 }
-export { Ride };
