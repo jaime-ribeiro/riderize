@@ -1,10 +1,10 @@
-import { Field, ID, InputType } from "type-graphql";
+import { Field, InputType, Int } from "type-graphql";
 
 @InputType()
-export class UserRideRegistrationInput {
-  @Field()
+export class UserRideSubscriptionInput {
+  @Field((type) => Int)
   ride_id: number;
-  @Field()
+  @Field((type) => Int)
   user_id: number;
   @Field()
   subscription_date: Date;

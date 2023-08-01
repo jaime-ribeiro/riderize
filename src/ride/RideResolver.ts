@@ -19,13 +19,19 @@ export class RideResolver {
         additional_information: data.additional_information,
         start_place: data.start_place,
         participants_limit: data.participants_limit,
+        created_by: data.created_by,
       },
     });
     return ride;
   }
 
   @Query(() => [Ride])
-  async getRides(@Ctx() ctx: Context): Promise<Ride[]> {
-    return await ctx.prisma.ride.findMany();
+  async myRides(
+    @Arg("created_by") created_by: number,
+    @Ctx() ctx: Context
+  ): Promise<Ride[]> {
+    return await ctx.prisma.ride.findMany({
+      where: { created_by: created_by },
+    });
   }
 }

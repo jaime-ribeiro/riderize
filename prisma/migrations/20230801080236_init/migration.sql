@@ -1,12 +1,3 @@
-/*
-  Warnings:
-
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- DropTable
-DROP TABLE "User";
-
 -- CreateTable
 CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
@@ -28,6 +19,7 @@ CREATE TABLE "rides" (
     "additional_information" TEXT,
     "start_place" TEXT NOT NULL,
     "participants_limit" INTEGER NOT NULL,
+    "created_by" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -39,8 +31,7 @@ CREATE TABLE "users_rides" (
     "id" SERIAL NOT NULL,
     "ride_id" INTEGER NOT NULL,
     "user_id" INTEGER NOT NULL,
-    "created_by" INTEGER NOT NULL,
-    "subscription_date" TIMESTAMP(3) NOT NULL,
+    "subscription_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -49,6 +40,9 @@ CREATE TABLE "users_rides" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- AddForeignKey
+ALTER TABLE "rides" ADD CONSTRAINT "rides_created_by_fkey" FOREIGN KEY ("created_by") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "users_rides" ADD CONSTRAINT "users_rides_ride_id_fkey" FOREIGN KEY ("ride_id") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

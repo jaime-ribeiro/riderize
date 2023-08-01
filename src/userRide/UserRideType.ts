@@ -12,8 +12,6 @@ export class UserRide {
   ride_id: number;
   @Field((type) => ID)
   user_id: number;
-  @Field((type) => ID)
-  created_by: number;
   @Field()
   subscription_date: Date;
 }

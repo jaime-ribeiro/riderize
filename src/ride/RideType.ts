@@ -22,4 +22,6 @@ export class Ride {
   start_place: string;
   @Field((type) => Int)
   participants_limit: number;
+  @Field((type) => ID)
+  created_by: number;
 }

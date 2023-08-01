@@ -10,19 +10,20 @@ scalar DateTime
 
 type Mutation {
   addRide(data: RideCreateInput!): Ride!
+  addSubscriptionUserRide(data: UserRideSubscriptionInput!): UserRide!
   addUser(data: UserCreateInput!): User!
-  registrationUserRide(data: UserRideRegistrationInput!): UserRide!
 }
 
 type Query {
-  UserRides(user_id: Float!): [UserRide!]!
-  getRides: [Ride!]!
   getUsers: [User!]!
+  myRides(created_by: Float!): [Ride!]!
+  mySubscriptionRides(user_id: Float!): [UserRide!]!
 }
 
 type Ride {
   additional_information: String
   createdAt: DateTime!
+  created_by: ID!
   end_date_registration: DateTime!
   id: ID!
   name: String!
@@ -35,6 +36,7 @@ type Ride {
 
 input RideCreateInput {
   additional_information: String
+  created_by: Int!
   end_date_registration: DateTime!
   name: String!
   participants_limit: Int!
@@ -58,7 +60,6 @@ input UserCreateInput {
 
 type UserRide {
   createdAt: DateTime!
-  created_by: ID!
   id: ID!
   ride_id: ID!
   subscription_date: DateTime!
@@ -66,8 +67,8 @@ type UserRide {
   user_id: ID!
 }
 
-input UserRideRegistrationInput {
-  ride_id: Float!
+input UserRideSubscriptionInput {
+  ride_id: Int!
   subscription_date: DateTime!
-  user_id: Float!
+  user_id: Int!
 }

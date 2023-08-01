@@ -21,6 +21,7 @@ model User {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   rides     UserRide[]
+  Ride      Ride[]
 
   @@map("users")
 }
@@ -34,9 +35,11 @@ model Ride {
   additional_information  String?    @db.Text
   start_place             String
   participants_limit      Int
+  created_by              Int
   createdAt               DateTime   @default(now())
   updatedAt               DateTime   @updatedAt
   users                   UserRide[]
+  User                    User       @relation(fields: [created_by], references: [id])
 
   @@map("rides")
 }
@@ -45,7 +48,6 @@ model UserRide {
   id                Int      @id @default(autoincrement())
   ride_id           Int
   user_id           Int
-  created_by        Int
   subscription_date DateTime @default(now())
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt

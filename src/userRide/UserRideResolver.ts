@@ -1,13 +1,13 @@
 import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { UserRide } from "./UserRideType";
 import { Context } from "../context";
-import { UserRideRegistrationInput } from "./UserRideInput";
+import { UserRideSubscriptionInput } from "./UserRideInput";
 
 @Resolver(UserRide)
 export class UserRideResolver {
   @Mutation(() => UserRide)
-  async registrationUserRide(
-    @Arg("data") data: UserRideRegistrationInput,
+  async addSubscriptionUserRide(
+    @Arg("data") data: UserRideSubscriptionInput,
     @Ctx() ctx: Context
   ): Promise<UserRide> {
     const userRide = await ctx.prisma.userRide.create({
@@ -15,14 +15,13 @@ export class UserRideResolver {
         ride_id: data.ride_id,
         user_id: data.user_id,
         subscription_date: data.subscription_date,
-        created_by: 1,
       },
     });
     return userRide;
   }
 
   @Query(() => [UserRide])
-  async UserRides(
+  async mySubscriptionRides(
     @Arg("user_id") user_id: number,
     @Ctx() ctx: Context
   ): Promise<UserRide[]> {

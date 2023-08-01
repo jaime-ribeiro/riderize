@@ -16,4 +16,6 @@ export class RideCreateInput {
   start_place: string;
   @Field((type) => Int)
   participants_limit: number;
+  @Field((type) => Int)
+  created_by: number;
 }

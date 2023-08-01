@@ -7,6 +7,7 @@ import { RideResolver } from "./ride/RideResolver";
 import { UserRideResolver } from "./userRide/UserRideResolver";
 import { UserResolver } from "./user/UserResolver";
 import { Context, context } from "./context";
+
 const app = async () => {
   const schema = await tq.buildSchema({
     resolvers: [RideResolver, UserResolver, UserRideResolver],
