@@ -2,9 +2,9 @@ import { Field, ID, InputType } from "type-graphql";
 
 @InputType()
 export class UserRideRegistrationInput {
-  @Field((type) => ID)
+  @Field()
   ride_id: number;
-  @Field((type) => ID)
+  @Field()
   user_id: number;
   @Field()
   subscription_date: Date;

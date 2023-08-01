@@ -10,9 +10,11 @@ scalar DateTime
 
 type Mutation {
   addRide(data: RideCreateInput!): Ride!
+  registrationUserRide(data: UserRideRegistrationInput!): UserRide!
 }
 
 type Query {
+  UserRides(user_id: Float!): [UserRide!]!
   getRides: [Ride!]!
 }
 
@@ -37,4 +39,20 @@ input RideCreateInput {
   start_date: DateTime!
   start_date_registration: DateTime!
   start_place: String!
+}
+
+type UserRide {
+  createdAt: DateTime!
+  created_by: ID!
+  id: ID!
+  ride_id: ID!
+  subscription_date: DateTime!
+  updatedAt: DateTime!
+  user_id: ID!
+}
+
+input UserRideRegistrationInput {
+  ride_id: Float!
+  subscription_date: DateTime!
+  user_id: Float!
 }
