@@ -3,6 +3,11 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Auth {
+  token: String!
+  user: User!
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
@@ -12,6 +17,7 @@ type Mutation {
   addRide(data: RideCreateInput!): Ride!
   addSubscriptionUserRide(data: UserRideSubscriptionInput!): UserRide!
   addUser(data: UserCreateInput!): User!
+  signIn(email: String!, name: String!): Auth!
 }
 
 type Query {
