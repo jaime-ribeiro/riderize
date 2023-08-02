@@ -7,13 +7,23 @@ const prisma = new PrismaClient();
 export class UserResolver {
   @Mutation(() => User)
   async addUser(@Arg("data") data: UserCreateInput): Promise<User> {
-    const user = await prisma.user.create({
-      data: {
-        name: data.name,
+    const userExist = await prisma.user.findFirst({
+      where: {
         email: data.email,
       },
     });
-    return user;
+
+    if (userExist) {
+      throw new Error("User already exists");
+    } else {
+      const user = await prisma.user.create({
+        data: {
+          name: data.name,
+          email: data.email,
+        },
+      });
+      return user;
+    }
   }
 
   @Query(() => [User])
