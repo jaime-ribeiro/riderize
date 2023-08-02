@@ -1,3 +1,4 @@
+import { IsDate } from "class-validator";
 import { Field, InputType, Int } from "type-graphql";
 
 @InputType()
@@ -9,5 +10,6 @@ export class UserRideSubscriptionInput {
   user_id: number;
 
   @Field()
+  @IsDate()
   subscription_date: Date;
 }
