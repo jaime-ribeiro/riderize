@@ -17,7 +17,7 @@ const app = async () => {
   const schema = await tq.buildSchema({
     resolvers: [RideResolver, UserResolver, UserRideResolver, AuthResolver],
     authChecker: AuthenticationAssurance,
-    /* validate: { forbidUnknownValues: false }, */
+    validate: { forbidUnknownValues: false },
     emitSchemaFile: path.resolve(__dirname, "schema.gql"),
   });
 

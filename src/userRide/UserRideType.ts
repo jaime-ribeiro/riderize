@@ -4,7 +4,7 @@ import { Field, ID, ObjectType } from "type-graphql";
 export class UserRide {
   @Field((type) => ID)
   id: number;
-  @Field((type) => Date)
+  @Field(() => Date)
   createdAt: Date;
   @Field((type) => Date)
   updatedAt: Date;

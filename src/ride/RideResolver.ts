@@ -1,17 +1,14 @@
-import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Authorized, Mutation, Query, Resolver } from "type-graphql";
 import { Ride } from "./RideType";
 import { RideCreateInput } from "./RideInput";
-import { Context } from "../context";
-
+import { PrismaClient } from "@prisma/client";
+const prisma = new PrismaClient();
 @Resolver(Ride)
 export class RideResolver {
   @Mutation(() => Ride)
   @Authorized()
-  async addRide(
-    @Arg("data") data: RideCreateInput,
-    @Ctx() ctx: Context
-  ): Promise<Ride> {
-    const ride = await ctx.prisma.ride.create({
+  async addRide(@Arg("data") data: RideCreateInput): Promise<Ride> {
+    const ride = await prisma.ride.create({
       data: {
         name: data.name,
         start_date: data.start_date,
@@ -28,11 +25,8 @@ export class RideResolver {
 
   @Query(() => [Ride])
   @Authorized()
-  async myRides(
-    @Arg("created_by") created_by: number,
-    @Ctx() ctx: Context
-  ): Promise<Ride[]> {
-    return await ctx.prisma.ride.findMany({
+  async myRides(@Arg("created_by") created_by: number): Promise<Ride[]> {
+    return await prisma.ride.findMany({
       where: { created_by: created_by },
     });
   }
