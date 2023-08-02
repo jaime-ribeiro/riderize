@@ -1,4 +1,4 @@
-import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { UserRide } from "./UserRideType";
 import { Context } from "../context";
 import { UserRideSubscriptionInput } from "./UserRideInput";
@@ -6,6 +6,7 @@ import { UserRideSubscriptionInput } from "./UserRideInput";
 @Resolver(UserRide)
 export class UserRideResolver {
   @Mutation(() => UserRide)
+  @Authorized()
   async addSubscriptionUserRide(
     @Arg("data") data: UserRideSubscriptionInput,
     @Ctx() ctx: Context
@@ -21,6 +22,7 @@ export class UserRideResolver {
   }
 
   @Query(() => [UserRide])
+  @Authorized()
   async mySubscriptionRides(
     @Arg("user_id") user_id: number,
     @Ctx() ctx: Context
