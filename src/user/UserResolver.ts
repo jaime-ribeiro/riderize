@@ -22,5 +22,3 @@ export class UserResolver {
     return await prisma.user.findMany();
   }
 }
-
-//Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTA5MjkwNDQsImV4cCI6MTY5MTUzMzg0NCwic3ViIjoiXCIxXCIifQ.ka8qO2_Czi1mj3RWrdJ6617lBzgdNPwXjH44C7x4-v4
