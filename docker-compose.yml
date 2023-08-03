@@ -12,6 +12,11 @@ services:
       - postgresql11:/var/lib/postgresql
     restart: unless-stopped
 
+  redis:
+    image: redis
+    ports: 
+      - 6379:6379
+
   riderize:
     stdin_open: true
     build:
