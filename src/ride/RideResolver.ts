@@ -30,4 +30,10 @@ export class RideResolver {
       where: { created_by: created_by },
     });
   }
+
+  @Query(() => [Ride])
+  @Authorized()
+  async rides(): Promise<Ride[]> {
+    return await prisma.ride.findMany();
+  }
 }

@@ -24,6 +24,7 @@ type Query {
   getUsers: [User!]!
   myRides(created_by: Float!): [Ride!]!
   mySubscriptionRides(user_id: Float!): [UserRide!]!
+  rides: [Ride!]!
 }
 
 type Ride {
