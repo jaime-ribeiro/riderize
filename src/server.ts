@@ -4,9 +4,9 @@ import * as tq from "type-graphql";
 import AuthenticationAssurance from "./middlewares/AuthenticationAssurance";
 import express from "express";
 import { ApolloServer, ExpressContext } from "apollo-server-express";
-import { RideResolver } from "./ride/RideResolver";
-import { UserRideResolver } from "./userRide/UserRideResolver";
-import { UserResolver } from "./user/UserResolver";
+import { RideResolver } from "./resolvers/RideResolver";
+import { UserRideResolver } from "./resolvers/UserRideResolver";
+import { UserResolver } from "./resolvers/UserResolver";
 import { AuthResolver } from "./resolvers/SessionResolver";
 import { PrismaClient } from "@prisma/client";
 

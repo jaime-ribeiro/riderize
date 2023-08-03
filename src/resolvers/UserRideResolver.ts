@@ -1,6 +1,6 @@
 import { Arg, Authorized, Mutation, Query, Resolver } from "type-graphql";
-import { UserRide } from "./UserRideType";
-import { UserRideSubscriptionInput } from "./UserRideInput";
+import { UserRide } from "../schema/userRide/UserRideType";
+import { UserRideSubscriptionInput } from "../schema/userRide/UserRideInput";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();

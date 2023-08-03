@@ -1,5 +1,5 @@
 import { Field, ObjectType } from "type-graphql";
-import { User } from "../user/UserType";
+import { User } from "./user/UserType";
 
 interface IAuth {
   token: string;
